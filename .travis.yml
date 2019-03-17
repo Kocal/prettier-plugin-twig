@@ -1,0 +1,37 @@
+dist: trusty
+
+language: node_js
+node_js:
+  - 8
+  - 10
+  - 11
+  - node
+
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
+
+notifications:
+  email: false
+
+cache:
+  directories:
+    - ~/.nvm
+    - ./node_modules
+
+before_install:
+  - npm i -g yarn
+
+install:
+  - yarn install --frozen-lockfile
+
+script:
+  - echo Hello world!
+
+jobs:
+  include:
+    - stage: Release
+      if: type = push AND branch = master
+      node_js: node
+      script:
+        - yarn run semantic-release
