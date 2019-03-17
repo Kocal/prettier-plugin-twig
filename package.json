@@ -5,13 +5,20 @@
   "repository": "https://github.com/Kocal/prettier-plugin-twig.git",
   "author": "Hugo Alliaume <kocal@live.fr>",
   "license": "MIT",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "main": "src/index.js",
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {},
+  "scripts": {
+    "semantic-release": "semantic-release"
+  },
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@kocal/semantic-release-preset": "^1.1.7",
+    "semantic-release": "^15.13.3"
+  },
   "peerDependencies": {}
 }
