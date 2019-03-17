@@ -1,0 +1,17 @@
+{
+  "name": "@kocal/prettier-plugin-twig",
+  "version": "0.0.0-development",
+  "description": "Prettier Twig Plugin",
+  "repository": "https://github.com/Kocal/prettier-plugin-twig.git",
+  "author": "Hugo Alliaume <kocal@live.fr>",
+  "license": "MIT",
+  "files": ["src"],
+  "main": "src/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {}
+}
