@@ -3463,6 +3463,11 @@ libnpx@^10.2.0:
     y18n "^4.0.0"
     yargs "^11.0.0"
 
+linguist-languages@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/linguist-languages/-/linguist-languages-6.3.0.tgz#b15a847c130229cc9239ebb11f0525a0e4c7a092"
+  integrity sha512-d86fIQM00SqmBmAErxRpBEBe2Nw/WK4Se999wavaXc+lqarOLnoenGP3V/wgBclxKsRXEYWTd6mvv8373vPSKg==
+
 load-json-file@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-4.0.0.tgz#2f5f45ab91e33216234fd53adab668eb4ec0993b"
