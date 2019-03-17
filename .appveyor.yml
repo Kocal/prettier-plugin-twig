@@ -16,4 +16,4 @@ install:
 build: off
 
 test_script:
-  - echo Hello world!
+  - yarn run test

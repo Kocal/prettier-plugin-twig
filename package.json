@@ -13,12 +13,22 @@
     "access": "public"
   },
   "scripts": {
+    "test": "jest",
     "semantic-release": "semantic-release"
   },
   "dependencies": {},
   "devDependencies": {
     "@kocal/semantic-release-preset": "^1.1.7",
+    "jest": "^24.5.0",
+    "jest-snapshot-serializer-raw": "^1.1.0",
+    "prettier": "^1.16.4",
     "semantic-release": "^15.13.3"
   },
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/tests_config/run_spec.js"
+    ],
+    "testRegex": "jsfmt\\.spec\\.js$"
+  }
 }
