@@ -16,7 +16,10 @@
     "test": "jest",
     "semantic-release": "semantic-release"
   },
-  "dependencies": {},
+  "dependencies": {
+    "linguist-languages": "^6.3.0",
+    "twing": "^2.2.2"
+  },
   "devDependencies": {
     "@kocal/semantic-release-preset": "^1.1.7",
     "jest": "^24.5.0",
