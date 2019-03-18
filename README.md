@@ -4,6 +4,10 @@
 [![Build Status](https://travis-ci.com/Kocal/prettier-plugin-twig.svg?branch=master)](https://travis-ci.com/Kocal/prettier-plugin-twig)
 [![Build status](https://ci.appveyor.com/api/projects/status/h2knu57tu1i0d3la/branch/master?svg=true)](https://ci.appveyor.com/project/Kocal/prettier-plugin-twig/branch/master)
 
+## WORK IN PROGRESS
+
+The plugin is still under development, nothing will work if you try to install it now! :)
+
 ## Install
 
 yarn:
