@@ -6,9 +6,9 @@ const twing = new TwingEnvironment();
 function parse(text, parsers, opts) {
   const source = new TwingSource(text, path.basename(opts.filepath), opts.filepath);
   const tokens = twing.tokenize(source);
-  const nodes = twing.parse(tokens);
+  const nodeModule = twing.parse(tokens);
 
-  return nodes.getNode('body');
+  return nodeModule;
 }
 
 module.exports = parse;

@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`set.twig 1`] = `
+Object {
+  Symbol(jest-snapshot-serializer-raw): "====================================options=====================================
+parsers: [\\"twig\\"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+{% set foo = 'bar' %}
+{%  set  foo  =     'bar'   %}
+{%- set foo = 'bar' -%}
+{%-    set     foo = 'bar'-%}
+{%  set foo, bar= 'bar',  'foo'  %}
+{% set foo = 'with a \\"' %}
+{% set foo = \\"with a '\\" %}
+{% set foo = [1, 2, 3] %}
+
+=====================================output=====================================
+{% set foo = \\"bar\\" %}
+{% set foo = \\"bar\\" %}
+{% set foo = \\"bar\\" %}
+{% set foo = \\"bar\\" %}
+{% set foo, bar = \\"bar\\", \\"foo\\" %}
+{% set foo = 'with a \\"' %}
+{% set foo = \\"with a '\\" %}
+{% set foo = XXX %}
+
+================================================================================",
+}
+`;
+
+exports[`set.twig 2`] = `
+Object {
+  Symbol(jest-snapshot-serializer-raw): "====================================options=====================================
+parsers: [\\"twig\\"]
+printWidth: 80
+singleQuote: true
+                                                                                | printWidth
+=====================================input======================================
+{% set foo = 'bar' %}
+{%  set  foo  =     'bar'   %}
+{%- set foo = 'bar' -%}
+{%-    set     foo = 'bar'-%}
+{%  set foo, bar= 'bar',  'foo'  %}
+{% set foo = 'with a \\"' %}
+{% set foo = \\"with a '\\" %}
+{% set foo = [1, 2, 3] %}
+
+=====================================output=====================================
+{% set foo = 'bar' %}
+{% set foo = 'bar' %}
+{% set foo = 'bar' %}
+{% set foo = 'bar' %}
+{% set foo, bar = 'bar', 'foo' %}
+{% set foo = 'with a \\"' %}
+{% set foo = \\"with a '\\" %}
+{% set foo = XXX %}
+
+================================================================================",
+}
+`;
