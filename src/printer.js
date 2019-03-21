@@ -7,7 +7,7 @@ let nodeModule;
 
 function printString(rawContent, options) {
   const double = {
-    quote: '"',
+    quote: "\"",
     regex: /"/g
   };
   const single = {
@@ -38,13 +38,12 @@ function printString(rawContent, options) {
 }
 
 /**
- * @param {FastPath} path
+ * @param {FastPath|TwingNode} path
  * @param {Object} options
  * @param {Function} print
  * @return {string}
  */
 function genericPrint(path, options, print) {
-  console.log(options.singleQuote)
   /** @type TwingNode */
   let node = path instanceof TwingNode ? path : path.getValue();
 
@@ -64,6 +63,14 @@ function genericPrint(path, options, print) {
         Array.from(node.getNodes().values()).map(n => genericPrint(n, options))
       );
     }
+    case TwingNodeType.EXPRESSION_CONSTANT:
+      const value = node.getAttribute("value");
+
+      if (typeof value === "string") {
+        return printString(value, options);
+      }
+
+      return value;
     case TwingNodeType.SET:
       const names = Array.from(
         node
@@ -77,17 +84,7 @@ function genericPrint(path, options, print) {
           .getNode("values")
           .getNodes()
           .values()
-      ).map(n => {
-        switch (n.getType()) {
-          case TwingNodeType.EXPRESSION_CONSTANT:
-            return printString(n.getAttribute("value"), options);
-          default:
-            console.log({ n });
-            return "XXX";
-        }
-      });
-
-      console.log({ names, values });
+      ).map(n => genericPrint(n, options, print));
 
       return join(" ", [
         "{%",
