@@ -60,18 +60,19 @@ function genericPrint(path, options, print) {
     case null:
     case TwingNodeType.BODY: {
       return concat(
-        Array.from(node.getNodes().values()).map(n => genericPrint(n, options))
+        Array.from(node.getNodes().values()).map(n => genericPrint(n, options, print))
       );
     }
-    case TwingNodeType.EXPRESSION_CONSTANT:
+    case TwingNodeType.EXPRESSION_CONSTANT: {
       const value = node.getAttribute("value");
 
       if (typeof value === "string") {
         return printString(value, options);
       }
 
-      return value;
-    case TwingNodeType.SET:
+      return String(value);
+    }
+    case TwingNodeType.SET: {
       const names = Array.from(
         node
           .getNode("names")
@@ -95,6 +96,14 @@ function genericPrint(path, options, print) {
         "%}",
         hardline
       ]);
+    }
+    case TwingNodeType.EXPRESSION_ARRAY: {
+      const values = Array.from(node.getNodes().values())
+        .filter((n, i) => i % 2 !== 0) // filter array keys
+        .map(n => genericPrint(n, options, print));
+
+      return concat(["[", join(", ", values), "]"]);
+    }
     default:
       return "ok";
   }
