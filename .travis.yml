@@ -34,4 +34,4 @@ jobs:
       if: type = push AND branch = master
       node_js: node
       script:
-        - yarn run semantic-release
+        #- yarn run semantic-release
