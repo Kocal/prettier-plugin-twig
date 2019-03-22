@@ -105,7 +105,7 @@ function genericPrint(path, options, print) {
       return concat(["[", join(", ", values), "]"]);
     }
     default:
-      return "ok";
+      throw new Error(`Impossible to prettify a node of type "${node.getType()}". Please open an issue on https://github.com/Kocal/prettier-plugin-twig.`);
   }
 
   return "";
