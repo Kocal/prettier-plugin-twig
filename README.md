@@ -8,7 +8,7 @@
 
 The plugin is still under development, nothing will work if you try to install it now! :)
 
-### Roadmap
+### Roadmap
 
 | Type                         | Example                                                                       | Implemented |
 | ---------------------------- | ----------------------------------------------------------------------------- | ----------- |
@@ -23,17 +23,17 @@ The plugin is still under development, nothing will work if you try to install i
 | `EXPRESSION_BLOCK_REFERENCE` | ...                                                                           | :x: |
 | `EXPRESSION_CONDITIONAL`     | ...                                                                           | :x: |
 | `EXPRESSION_CONSTANT`        | `"foo"`, `123`                                                                | :heavy_check_mark: |
-| `EXPRESSION_FILTER`          | ...                                                                               | :x: |
-| `EXPRESSION_FUNCTION`        | ...                                                                               | :x: |
-| `EXPRESSION_GET_ATTR`        | ...                                                                               | :x: |
-| `EXPRESSION_METHOD_CALL`     | ...                                                                               | :x: |
-| `EXPRESSION_NAME`            | ...                                                                               | :x: |
-| `EXPRESSION_NULL_COALESCE`   | ...                                                                               | :x: |
-| `EXPRESSION_PARENT`          | ...                                                                               | :x: |
-| `EXPRESSION_TEST`            | ...                                                                               | :x: |
-| `EXPRESSION_UNARY`           | ...                                                                               | :x: |
-| `EXPRESSION_UNARY_NEG`       | ...                                                                               | :x: |
-| `EXPRESSION_UNARY_POS`       | ...                                                                               | :x: |
+| `EXPRESSION_FILTER`          | ...                                                                           | :x: |
+| `EXPRESSION_FUNCTION`        | ...                                                                           | :x: |
+| `EXPRESSION_GET_ATTR`        | ...                                                                           | :x: |
+| `EXPRESSION_METHOD_CALL`     | ...                                                                           | :x: |
+| `EXPRESSION_NAME`            | ...                                                                           | :x: |
+| `EXPRESSION_NULL_COALESCE`   | ...                                                                           | :x: |
+| `EXPRESSION_PARENT`          | ...                                                                           | :x: |
+| `EXPRESSION_TEST`            | ...                                                                           | :x: |
+| `EXPRESSION_UNARY`           | ...                                                                           | :x: |
+| `EXPRESSION_UNARY_NEG`       | ...                                                                           | :x: |
+| `EXPRESSION_UNARY_POS`       | ...                                                                           | :x: |
 | `FLUSH`                      | `{% flush %}`                                                                 | :x: |
 | `FOR`                        | `{% for i in 0..10 %} ... {% endfor %}`                                       | :x: |
 | `IF`                         | `{% if a > b %} ... {% endif %}`                                              | :x: |
@@ -42,7 +42,7 @@ The plugin is still under development, nothing will work if you try to install i
 | `MACRO`                      | `{% macro input(name, value, type = "text", size = 20) %} ... {% endmacro %}` | :x: |
 | `SANDBOX`                    | `{% sandbox %} {% include 'user.html' %} {% endsandbox %}`                    | :x: |
 | `SET`                        | `{% set a = 'a' %} {% set a, b, = 'a', 'b' %}`                                | :heavy_check_mark: |
-| `SPACELESS`                  | `{% spaceless %}<div>  <span>Hello</span>  </div>`                            | :x: |
+| `SPACELESS`                  | `{% spaceless %}<div>  <span>Hello</span>  </div>{% endspaceless %}`          | :x: |
 | `TEXT`                       | `"some text"`                                                                 | :x: |
 | `WITH`                       | `{% with { foo: 42 } %} foo: {{ foo }} {% endwith %}`                         | :x: |
 
