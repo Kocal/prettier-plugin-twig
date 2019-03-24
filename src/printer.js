@@ -44,11 +44,19 @@ function printString(rawContent, options) {
  * @return {string}
  */
 function genericPrint(path, options, print) {
-  /** @type TwingNode */
-  let node = path instanceof TwingNode ? path : path.getValue();
+  /** @type {TwingNode|string} */
+  let node = path.constructor.name === "FastPath" ? path.getValue() : path;
 
   if (!node) {
     return "";
+  }
+
+  if (typeof node === "number") {
+    return String(node);
+  }
+
+  if (typeof node === "string") {
+    return printString(node, options);
   }
 
   if (node.getType() === TwingNodeType.MODULE) {
@@ -104,6 +112,8 @@ function genericPrint(path, options, print) {
 
       return concat(["[", join(", ", values), "]"]);
     }
+    case TwingNodeType.TEXT:
+      return node.getAttribute("data");
     default:
       throw new Error(`Impossible to prettify a node of type "${node.getType()}". Please open an issue on https://github.com/Kocal/prettier-plugin-twig.`);
   }
