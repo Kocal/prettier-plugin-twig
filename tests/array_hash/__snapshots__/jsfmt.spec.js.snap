@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`array_hash.twig 1`] = `
+Object {
+  Symbol(jest-snapshot-serializer-raw): "====================================options=====================================
+parsers: [\\"twig\\"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+{% set foo = { foo: 'bar' } %}
+{% set foo = {foo:bar}   -%}
+{% set foo = {(foo): 'bar'} %}
+{% set foo = {foo:'bar', (foo): 'bar', items: {a: 'a'  , b:'b'} } %}
+
+=====================================output=====================================
+{% set foo = { foo: \\"bar\\" } %}
+{% set foo = { foo: bar } %}
+{% set foo = { (foo): \\"bar\\" } %}
+{% set foo = { foo: \\"bar\\", (foo): \\"bar\\", items: { a: \\"a\\", b: \\"b\\" } } %}
+
+================================================================================",
+}
+`;
+
+exports[`array_hash.twig 2`] = `
+Object {
+  Symbol(jest-snapshot-serializer-raw): "====================================options=====================================
+parsers: [\\"twig\\"]
+printWidth: 80
+                                                                                | printWidth
+=====================================input======================================
+{% set foo = { foo: 'bar' } %}
+{% set foo = {foo:bar}   -%}
+{% set foo = {(foo): 'bar'} %}
+{% set foo = {foo:'bar', (foo): 'bar', items: {a: 'a'  , b:'b'} } %}
+
+=====================================output=====================================
+{% set foo = { foo: \\"bar\\" } %}
+{% set foo = { foo: bar } %}
+{% set foo = { (foo): \\"bar\\" } %}
+{% set foo = { foo: \\"bar\\", (foo): \\"bar\\", items: { a: \\"a\\", b: \\"b\\" } } %}
+
+================================================================================",
+}
+`;

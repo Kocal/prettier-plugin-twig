@@ -1,9 +1,17 @@
-const { TwingNode, TwingNodeType } = require("twing");
-const { join, hardline, concat } = require("prettier").doc.builders;
+const { TwingNode, TwingNodeType, TwingNodeExpressionHash } = require("twing");
+const { indent, join, line, softline, hardline, concat, group } = require("prettier").doc.builders;
 const util = require("./_util-from-prettier");
 
 // The root, in fact that's not really a node, but it contains references to blocks, macros, ...
 let nodeModule;
+
+function indentConcat(docs) {
+  return indent(concat(docs));
+}
+
+function groupConcat(docs) {
+  return group(concat(docs));
+}
 
 function printString(rawContent, options) {
   const double = {
@@ -71,15 +79,6 @@ function genericPrint(path, options, print) {
         Array.from(node.getNodes().values()).map(n => genericPrint(n, options, print))
       );
     }
-    case TwingNodeType.EXPRESSION_CONSTANT: {
-      const value = node.getAttribute("value");
-
-      if (typeof value === "string") {
-        return printString(value, options);
-      }
-
-      return String(value);
-    }
     case TwingNodeType.SET: {
       const names = Array.from(
         node
@@ -106,11 +105,51 @@ function genericPrint(path, options, print) {
       ]);
     }
     case TwingNodeType.EXPRESSION_ARRAY: {
-      const values = Array.from(node.getNodes().values())
-        .filter((n, i) => i % 2 !== 0) // filter array keys
-        .map(n => genericPrint(n, options, print));
+      const isHash = node instanceof TwingNodeExpressionHash;
 
-      return concat(["[", join(", ", values), "]"]);
+      const items = [];
+      for (let i = 0; i < node.getNodes().size; i += 2) {
+        const keyNode = node.getNode(i);
+        const valueNode = node.getNode(i + 1);
+
+        if (isHash) {
+          const keyName = keyNode.hasAttribute("name")
+            ? concat(["(", keyNode.getAttribute("name"), ")"])
+            : keyNode.getAttribute("value");
+
+          items.push(
+            concat([
+              keyName,
+              ": ",
+              genericPrint(valueNode, options, print)
+            ])
+          );
+        } else {
+          items.push(genericPrint(valueNode, options, print));
+        }
+      }
+
+      return groupConcat([
+        isHash ? concat(["{", line]) : "[",
+        indentConcat([
+          softline,
+          join(concat([",", line]), items)
+        ]),
+        softline,
+        isHash ? concat([line, "}"]) : "]"
+      ]);
+    }
+    case TwingNodeType.EXPRESSION_CONSTANT: {
+      const value = node.getAttribute("value");
+
+      if (typeof value === "string") {
+        return printString(value, options);
+      }
+
+      return String(value);
+    }
+    case TwingNodeType.EXPRESSION_NAME: {
+      return node.getAttribute("name");
     }
     case TwingNodeType.TEXT:
       return node.getAttribute("data");
