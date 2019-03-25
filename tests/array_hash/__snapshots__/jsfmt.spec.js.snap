@@ -20,7 +20,11 @@ printWidth: 80
 
 {% set page = { foo: 'Foo',
     bar: 'Bar',
-    foobar: 'foobar'
+    foobar: 'foobar',
+    foo    :  foo.foo,
+    bar: foo.foo .bar,
+    bar: foo[ foo   ].bar,
+    bar: foo [foo]  [foo].bar.bar ,
 }
 %}
 
@@ -45,7 +49,15 @@ printWidth: 80
     }
 } %}
 
-{% set page = { foo: \\"Foo\\", bar: \\"Bar\\", foobar: \\"foobar\\" } %}
+{% set page = {
+    foo: \\"Foo\\",
+    bar: \\"Bar\\",
+    foobar: \\"foobar\\",
+    foo: foo.foo,
+    bar: foo.foo.bar,
+    bar: foo[foo].bar,
+    bar: foo[foo][foo].bar.bar
+} %}
 
 ================================================================================",
 }
@@ -71,7 +83,11 @@ printWidth: 80
 
 {% set page = { foo: 'Foo',
     bar: 'Bar',
-    foobar: 'foobar'
+    foobar: 'foobar',
+    foo    :  foo.foo,
+    bar: foo.foo .bar,
+    bar: foo[ foo   ].bar,
+    bar: foo [foo]  [foo].bar.bar ,
 }
 %}
 
@@ -96,7 +112,15 @@ printWidth: 80
     }
 } %}
 
-{% set page = { foo: \\"Foo\\", bar: \\"Bar\\", foobar: \\"foobar\\" } %}
+{% set page = {
+    foo: \\"Foo\\",
+    bar: \\"Bar\\",
+    foobar: \\"foobar\\",
+    foo: foo.foo,
+    bar: foo.foo.bar,
+    bar: foo[foo].bar,
+    bar: foo[foo][foo].bar.bar
+} %}
 
 ================================================================================",
 }

@@ -1,4 +1,4 @@
-const { TwingNode, TwingNodeType, TwingNodeExpressionHash, TwingNodeExpressionName } = require("twing");
+const { TwingNode, TwingNodeType, TwingNodeExpressionHash, TwingNodeExpressionName, TwingNodeExpressionGetAttr } = require("twing");
 const { indent, join, line, softline, hardline, concat, group, ifBreak } = require("prettier").doc.builders;
 const util = require("./_util-from-prettier");
 
@@ -43,6 +43,18 @@ function printString(rawContent, options) {
   const quote = shouldUseAlternateQuote ? alternate.quote : preferred.quote;
 
   return util.makeString(rawContent, quote);
+}
+
+function trimQuotes(stringValue) {
+  if (['"', "'"].includes(stringValue[0])) {
+    stringValue = stringValue.substr(1);
+  }
+
+  if (['"', "'"].includes(stringValue[stringValue.length - 1])) {
+    stringValue = stringValue.substr(0, stringValue.length - 1);
+  }
+
+  return stringValue;
 }
 
 /**
@@ -149,6 +161,21 @@ function genericPrint(path, options, print) {
       }
 
       return String(value);
+    }
+    case TwingNodeType.EXPRESSION_GET_ATTR: {
+      const nodeNode = node.getNode("node");
+      const nodeAttribute = node.getNode("attribute");
+      const nodeArguments = node.getNode("arguments");
+
+      const keyValue = genericPrint(nodeNode, options, print);
+      const type = node.getAttribute("type");
+      const value = trimQuotes(genericPrint(nodeAttribute, options, print));
+
+      if (type === "array") {
+        return concat([keyValue, "[", value, "]"]);
+      }
+
+      return concat([keyValue, ".", value]);
     }
     case TwingNodeType.EXPRESSION_NAME: {
       return node.getAttribute("name");

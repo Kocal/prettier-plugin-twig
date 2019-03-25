@@ -25,7 +25,7 @@ The plugin is still under development, nothing will work if you try to install i
 | `EXPRESSION_CONSTANT`        | `"foo"`, `123`                                                                | :heavy_check_mark: |
 | `EXPRESSION_FILTER`          | ...                                                                           | :x: |
 | `EXPRESSION_FUNCTION`        | ...                                                                           | :x: |
-| `EXPRESSION_GET_ATTR`        | ...                                                                           | :x: |
+| `EXPRESSION_GET_ATTR`        | Accessing an attribute, e.g.: `foo.bar`                                       | :x: |
 | `EXPRESSION_METHOD_CALL`     | ...                                                                           | :x: |
 | `EXPRESSION_NAME`            | Usage of a variable                                                           | :heavy_check_mark: |
 | `EXPRESSION_NULL_COALESCE`   | ...                                                                           | :x: |
