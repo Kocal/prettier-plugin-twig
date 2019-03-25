@@ -1,4 +1,4 @@
-const { TwingNode, TwingNodeType, TwingNodeExpressionHash } = require("twing");
+const { TwingNode, TwingNodeType, TwingNodeExpressionHash, TwingNodeExpressionName } = require("twing");
 const { indent, join, line, softline, hardline, concat, group, ifBreak } = require("prettier").doc.builders;
 const util = require("./_util-from-prettier");
 
@@ -106,6 +106,8 @@ function genericPrint(path, options, print) {
     }
     case TwingNodeType.EXPRESSION_ARRAY: {
       const isHash = node instanceof TwingNodeExpressionHash;
+      const openDoc = isHash ? concat(["{", ifBreak(" ", line)]) : "[";
+      const closeDoc = isHash ? concat([ifBreak("", line), "}"]) : "]";
 
       const items = [];
       for (let i = 0; i < node.getNodes().size; i += 2) {
@@ -113,7 +115,7 @@ function genericPrint(path, options, print) {
         const valueNode = node.getNode(i + 1);
 
         if (isHash) {
-          const keyName = keyNode.hasAttribute("name")
+          const keyName = keyNode instanceof TwingNodeExpressionName
             ? concat(["(", keyNode.getAttribute("name"), ")"])
             : keyNode.getAttribute("value");
 
@@ -130,13 +132,13 @@ function genericPrint(path, options, print) {
       }
 
       return groupConcat([
-        isHash ? concat(["{", ifBreak(" ", line)]) : "[",
+        openDoc,
         indentConcat([
           softline,
           join(concat([",", line]), items)
         ]),
         softline,
-        isHash ? concat([ifBreak("", line), "}"]) : "]"
+        closeDoc
       ]);
     }
     case TwingNodeType.EXPRESSION_CONSTANT: {
