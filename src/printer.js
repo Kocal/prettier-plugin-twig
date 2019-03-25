@@ -136,7 +136,7 @@ function genericPrint(path, options, print) {
           join(concat([",", line]), items)
         ]),
         softline,
-        isHash ? concat([ifBreak(" ", line), "}"]) : "]"
+        isHash ? concat([ifBreak("", line), "}"]) : "]"
       ]);
     }
     case TwingNodeType.EXPRESSION_CONSTANT: {
