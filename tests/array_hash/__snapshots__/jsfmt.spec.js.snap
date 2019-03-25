@@ -18,6 +18,12 @@ printWidth: 80
     aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey3: 'aVeryVeryVeryVeryVeryVeryVeryLongValue3',aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey4: {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey5:'aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue5'}
 }} %}
 
+{% set page = { foo: 'Foo',
+    bar: 'Bar',
+    foobar: 'foobar'
+}
+%}
+
 =====================================output=====================================
 {% set foo = { foo: \\"bar\\" } %}
 {% set foo = { foo: bar } %}
@@ -38,6 +44,8 @@ printWidth: 80
         }
     }
 } %}
+
+{% set page = { foo: \\"Foo\\", bar: \\"Bar\\", foobar: \\"foobar\\" } %}
 
 ================================================================================",
 }
@@ -61,6 +69,12 @@ printWidth: 80
     aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey3: 'aVeryVeryVeryVeryVeryVeryVeryLongValue3',aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey4: {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey5:'aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue5'}
 }} %}
 
+{% set page = { foo: 'Foo',
+    bar: 'Bar',
+    foobar: 'foobar'
+}
+%}
+
 =====================================output=====================================
 {% set foo = { foo: \\"bar\\" } %}
 {% set foo = { foo: bar } %}
@@ -81,6 +95,8 @@ printWidth: 80
         }
     }
 } %}
+
+{% set page = { foo: \\"Foo\\", bar: \\"Bar\\", foobar: \\"foobar\\" } %}
 
 ================================================================================",
 }
