@@ -1,0 +1,20 @@
+{% set foo = { foo: 'bar' } %}
+{% set foo = {foo:bar}   -%}
+{% set foo = {(foo): 'bar'} %}
+{% set foo = {foo:'bar', (foo): 'bar', items: {a: 'a'  , b:'b'} } %}
+{% set foo = {'a': 'a', "b":"b" } %}
+{% set foo = {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: 'aVeryVeryVeryVeryVeryVeryVeryLongValue', aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: 'aVeryVeryVeryVeryVeryVeryVeryLongValue2', } %}
+
+{% set foo = {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: 'aVeryVeryVeryVeryVeryVeryVeryLongValue', aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: {
+    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey3: 'aVeryVeryVeryVeryVeryVeryVeryLongValue3',aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey4: {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey5:'aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue5'}
+}} %}
+
+{% set page = { foo: 'Foo',
+    bar: 'Bar',
+    foobar: 'foobar',
+    foo    :  foo.foo,
+    bar: foo.foo .bar,
+    bar: foo[ foo   ].bar,
+    bar: foo [foo]  [foo].bar.bar ,
+}
+%}

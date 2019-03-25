@@ -1,9 +1,17 @@
-const { TwingNode, TwingNodeType } = require("twing");
-const { join, hardline, concat } = require("prettier").doc.builders;
+const { TwingNode, TwingNodeType, TwingNodeExpressionHash, TwingNodeExpressionName, TwingNodeExpressionGetAttr } = require("twing");
+const { indent, join, line, softline, hardline, concat, group, ifBreak } = require("prettier").doc.builders;
 const util = require("./_util-from-prettier");
 
 // The root, in fact that's not really a node, but it contains references to blocks, macros, ...
 let nodeModule;
+
+function indentConcat(docs) {
+  return indent(concat(docs));
+}
+
+function groupConcat(docs) {
+  return group(concat(docs));
+}
 
 function printString(rawContent, options) {
   const double = {
@@ -37,6 +45,18 @@ function printString(rawContent, options) {
   return util.makeString(rawContent, quote);
 }
 
+function trimQuotes(stringValue) {
+  if (['"', "'"].includes(stringValue[0])) {
+    stringValue = stringValue.substr(1);
+  }
+
+  if (['"', "'"].includes(stringValue[stringValue.length - 1])) {
+    stringValue = stringValue.substr(0, stringValue.length - 1);
+  }
+
+  return stringValue;
+}
+
 /**
  * @param {FastPath|TwingNode} path
  * @param {Object} options
@@ -44,11 +64,19 @@ function printString(rawContent, options) {
  * @return {string}
  */
 function genericPrint(path, options, print) {
-  /** @type TwingNode */
-  let node = path instanceof TwingNode ? path : path.getValue();
+  /** @type {TwingNode|string} */
+  let node = path.constructor.name === "FastPath" ? path.getValue() : path;
 
   if (!node) {
     return "";
+  }
+
+  if (typeof node === "number") {
+    return String(node);
+  }
+
+  if (typeof node === "string") {
+    return printString(node, options);
   }
 
   if (node.getType() === TwingNodeType.MODULE) {
@@ -62,15 +90,6 @@ function genericPrint(path, options, print) {
       return concat(
         Array.from(node.getNodes().values()).map(n => genericPrint(n, options, print))
       );
-    }
-    case TwingNodeType.EXPRESSION_CONSTANT: {
-      const value = node.getAttribute("value");
-
-      if (typeof value === "string") {
-        return printString(value, options);
-      }
-
-      return String(value);
     }
     case TwingNodeType.SET: {
       const names = Array.from(
@@ -98,12 +117,71 @@ function genericPrint(path, options, print) {
       ]);
     }
     case TwingNodeType.EXPRESSION_ARRAY: {
-      const values = Array.from(node.getNodes().values())
-        .filter((n, i) => i % 2 !== 0) // filter array keys
-        .map(n => genericPrint(n, options, print));
+      const isHash = node instanceof TwingNodeExpressionHash;
+      const openDoc = isHash ? concat(["{", ifBreak(" ", line)]) : "[";
+      const closeDoc = isHash ? concat([ifBreak("", line), "}"]) : "]";
 
-      return concat(["[", join(", ", values), "]"]);
+      const items = [];
+      for (let i = 0; i < node.getNodes().size; i += 2) {
+        const keyNode = node.getNode(i);
+        const valueNode = node.getNode(i + 1);
+
+        if (isHash) {
+          const keyName = keyNode instanceof TwingNodeExpressionName
+            ? concat(["(", keyNode.getAttribute("name"), ")"])
+            : keyNode.getAttribute("value");
+
+          items.push(
+            concat([
+              keyName,
+              ": ",
+              genericPrint(valueNode, options, print)
+            ])
+          );
+        } else {
+          items.push(genericPrint(valueNode, options, print));
+        }
+      }
+
+      return groupConcat([
+        openDoc,
+        indentConcat([
+          softline,
+          join(concat([",", line]), items)
+        ]),
+        softline,
+        closeDoc
+      ]);
     }
+    case TwingNodeType.EXPRESSION_CONSTANT: {
+      const value = node.getAttribute("value");
+
+      if (typeof value === "string") {
+        return printString(value, options);
+      }
+
+      return String(value);
+    }
+    case TwingNodeType.EXPRESSION_GET_ATTR: {
+      const nodeNode = node.getNode("node");
+      const nodeAttribute = node.getNode("attribute");
+      const nodeArguments = node.getNode("arguments");
+
+      const keyValue = genericPrint(nodeNode, options, print);
+      const type = node.getAttribute("type");
+      const value = trimQuotes(genericPrint(nodeAttribute, options, print));
+
+      if (type === "array") {
+        return concat([keyValue, "[", value, "]"]);
+      }
+
+      return concat([keyValue, ".", value]);
+    }
+    case TwingNodeType.EXPRESSION_NAME: {
+      return node.getAttribute("name");
+    }
+    case TwingNodeType.TEXT:
+      return node.getAttribute("data");
     default:
       throw new Error(`Impossible to prettify a node of type "${node.getType()}". Please open an issue on https://github.com/Kocal/prettier-plugin-twig.`);
   }
