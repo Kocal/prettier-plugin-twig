@@ -1,5 +1,5 @@
 const { TwingNode, TwingNodeType, TwingNodeExpressionHash } = require("twing");
-const { indent, join, line, softline, hardline, concat, group } = require("prettier").doc.builders;
+const { indent, join, line, softline, hardline, concat, group, ifBreak } = require("prettier").doc.builders;
 const util = require("./_util-from-prettier");
 
 // The root, in fact that's not really a node, but it contains references to blocks, macros, ...
@@ -130,13 +130,13 @@ function genericPrint(path, options, print) {
       }
 
       return groupConcat([
-        isHash ? concat(["{", line]) : "[",
+        isHash ? concat(["{", ifBreak(" ", line)]) : "[",
         indentConcat([
           softline,
           join(concat([",", line]), items)
         ]),
         softline,
-        isHash ? concat([line, "}"]) : "]"
+        isHash ? concat([ifBreak(" ", line), "}"]) : "]"
       ]);
     }
     case TwingNodeType.EXPRESSION_CONSTANT: {
