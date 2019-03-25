@@ -11,6 +11,7 @@ printWidth: 80
 {% set foo = {foo:bar}   -%}
 {% set foo = {(foo): 'bar'} %}
 {% set foo = {foo:'bar', (foo): 'bar', items: {a: 'a'  , b:'b'} } %}
+{% set foo = {'a': 'a', \\"b\\":\\"b\\" } %}
 {% set foo = {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: 'aVeryVeryVeryVeryVeryVeryVeryLongValue', aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: 'aVeryVeryVeryVeryVeryVeryVeryLongValue2', } %}
 
 {% set foo = {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: 'aVeryVeryVeryVeryVeryVeryVeryLongValue', aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: {
@@ -22,6 +23,7 @@ printWidth: 80
 {% set foo = { foo: bar } %}
 {% set foo = { (foo): \\"bar\\" } %}
 {% set foo = { foo: \\"bar\\", (foo): \\"bar\\", items: { a: \\"a\\", b: \\"b\\" } } %}
+{% set foo = { a: \\"a\\", b: \\"b\\" } %}
 {% set foo = {
     aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue\\",
     aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue2\\"
@@ -52,6 +54,7 @@ printWidth: 80
 {% set foo = {foo:bar}   -%}
 {% set foo = {(foo): 'bar'} %}
 {% set foo = {foo:'bar', (foo): 'bar', items: {a: 'a'  , b:'b'} } %}
+{% set foo = {'a': 'a', \\"b\\":\\"b\\" } %}
 {% set foo = {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: 'aVeryVeryVeryVeryVeryVeryVeryLongValue', aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: 'aVeryVeryVeryVeryVeryVeryVeryLongValue2', } %}
 
 {% set foo = {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: 'aVeryVeryVeryVeryVeryVeryVeryLongValue', aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: {
@@ -63,6 +66,7 @@ printWidth: 80
 {% set foo = { foo: bar } %}
 {% set foo = { (foo): \\"bar\\" } %}
 {% set foo = { foo: \\"bar\\", (foo): \\"bar\\", items: { a: \\"a\\", b: \\"b\\" } } %}
+{% set foo = { a: \\"a\\", b: \\"b\\" } %}
 {% set foo = {
     aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue\\",
     aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue2\\"
