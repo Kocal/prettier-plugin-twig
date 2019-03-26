@@ -4,6 +4,7 @@ const util = require("./_util-from-prettier");
 
 // The root, in fact that's not really a node, but it contains references to blocks, macros, ...
 let nodeModule;
+let options;
 
 function indentConcat(docs) {
   return indent(concat(docs));
@@ -45,12 +46,56 @@ function printString(rawContent, options) {
   return util.makeString(rawContent, quote);
 }
 
+/**
+ * @param {TwingNode} node
+ * @param {String} openDoc
+ * @param {TwingNode[]} elements
+ * @param {String} closeDoc
+ */
+function printArrayLike(node, openDoc, elements, closeDoc) {
+  return groupConcat([
+    openDoc,
+    indentConcat([
+      softline,
+      join(concat([",", line]), elements)
+    ]),
+    softline,
+    closeDoc
+  ]);
+}
+
+function extractArrayLikeItems(node, isHash) {
+  const items = [];
+  for (let i = 0; i < node.getNodes().size; i += 2) {
+    const keyNode = node.getNode(i);
+    const valueNode = node.getNode(i + 1);
+
+    if (isHash) {
+      const keyName = keyNode instanceof TwingNodeExpressionName
+        ? concat(["(", keyNode.getAttribute("name"), ")"])
+        : keyNode.getAttribute("value");
+
+      items.push(
+        concat([
+          keyName,
+          ": ",
+          genericPrint(valueNode)
+        ])
+      );
+    } else {
+      items.push(genericPrint(valueNode));
+    }
+  }
+
+  return items;
+}
+
 function trimQuotes(stringValue) {
-  if (['"', "'"].includes(stringValue[0])) {
+  if (["\"", "'"].includes(stringValue[0])) {
     stringValue = stringValue.substr(1);
   }
 
-  if (['"', "'"].includes(stringValue[stringValue.length - 1])) {
+  if (["\"", "'"].includes(stringValue[stringValue.length - 1])) {
     stringValue = stringValue.substr(0, stringValue.length - 1);
   }
 
@@ -59,11 +104,10 @@ function trimQuotes(stringValue) {
 
 /**
  * @param {FastPath|TwingNode} path
- * @param {Object} options
- * @param {Function} print
+ * @param {Object?} opts
  * @return {string}
  */
-function genericPrint(path, options, print) {
+function genericPrint(path, opts) {
   /** @type {TwingNode|string} */
   let node = path.constructor.name === "FastPath" ? path.getValue() : path;
 
@@ -76,11 +120,12 @@ function genericPrint(path, options, print) {
   }
 
   if (typeof node === "string") {
-    return printString(node, options);
+    return printString(node, options || opts);
   }
 
   if (node.getType() === TwingNodeType.MODULE) {
     nodeModule = node;
+    options = opts;
     node = nodeModule.getNode("body");
   }
 
@@ -88,7 +133,7 @@ function genericPrint(path, options, print) {
     case null:
     case TwingNodeType.BODY: {
       return concat(
-        Array.from(node.getNodes().values()).map(n => genericPrint(n, options, print))
+        Array.from(node.getNodes().values()).map(n => genericPrint(n))
       );
     }
     case TwingNodeType.SET: {
@@ -104,7 +149,7 @@ function genericPrint(path, options, print) {
           .getNode("values")
           .getNodes()
           .values()
-      ).map(n => genericPrint(n, options, print));
+      ).map(n => genericPrint(n));
 
       return join(" ", [
         "{%",
@@ -120,38 +165,9 @@ function genericPrint(path, options, print) {
       const isHash = node instanceof TwingNodeExpressionHash;
       const openDoc = isHash ? concat(["{", ifBreak(" ", line)]) : "[";
       const closeDoc = isHash ? concat([ifBreak("", line), "}"]) : "]";
+      const items = extractArrayLikeItems(node, isHash);
 
-      const items = [];
-      for (let i = 0; i < node.getNodes().size; i += 2) {
-        const keyNode = node.getNode(i);
-        const valueNode = node.getNode(i + 1);
-
-        if (isHash) {
-          const keyName = keyNode instanceof TwingNodeExpressionName
-            ? concat(["(", keyNode.getAttribute("name"), ")"])
-            : keyNode.getAttribute("value");
-
-          items.push(
-            concat([
-              keyName,
-              ": ",
-              genericPrint(valueNode, options, print)
-            ])
-          );
-        } else {
-          items.push(genericPrint(valueNode, options, print));
-        }
-      }
-
-      return groupConcat([
-        openDoc,
-        indentConcat([
-          softline,
-          join(concat([",", line]), items)
-        ]),
-        softline,
-        closeDoc
-      ]);
+      return printArrayLike(node, openDoc, items, closeDoc);
     }
     case TwingNodeType.EXPRESSION_CONSTANT: {
       const value = node.getAttribute("value");
@@ -167,15 +183,19 @@ function genericPrint(path, options, print) {
       const nodeAttribute = node.getNode("attribute");
       const nodeArguments = node.getNode("arguments");
 
-      const keyValue = genericPrint(nodeNode, options, print);
+      const keyValue = genericPrint(nodeNode);
       const type = node.getAttribute("type");
-      const value = trimQuotes(genericPrint(nodeAttribute, options, print));
+      const value = trimQuotes(genericPrint(nodeAttribute));
+
+      const parameters = nodeArguments.getNodes().size === 0
+        ? ""
+        : printArrayLike(nodeArguments, "(", extractArrayLikeItems(nodeArguments), ")");
 
       if (type === "array") {
         return concat([keyValue, "[", value, "]"]);
       }
 
-      return concat([keyValue, ".", value]);
+      return concat([keyValue, ".", value, parameters]);
     }
     case TwingNodeType.EXPRESSION_NAME: {
       return node.getAttribute("name");
