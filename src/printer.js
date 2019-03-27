@@ -103,6 +103,15 @@ function trimQuotes(stringValue) {
 }
 
 /**
+ * @param {TwingNode} node
+ */
+function printEveryNodes(node) {
+  return concat(
+    [...node.getNodes().values()].map(n => genericPrint(n))
+  );
+}
+
+/**
  * @param {FastPath|TwingNode} path
  * @param {Object?} opts
  * @return {string}
@@ -132,9 +141,7 @@ function genericPrint(path, opts) {
   switch (node.getType()) {
     case null:
     case TwingNodeType.BODY: {
-      return concat(
-        Array.from(node.getNodes().values()).map(n => genericPrint(n))
-      );
+      return printEveryNodes(node);
     }
     case TwingNodeType.SET: {
       const names = Array.from(
@@ -150,6 +157,7 @@ function genericPrint(path, opts) {
           .getNodes()
           .values()
       ).map(n => genericPrint(n));
+      // const values = printEveryNodes(node.getNode("values"));
 
       return join(" ", [
         "{%",
@@ -199,6 +207,13 @@ function genericPrint(path, opts) {
     }
     case TwingNodeType.EXPRESSION_NAME: {
       return node.getAttribute("name");
+    }
+    case TwingNodeType.PRINT: {
+      return join(" ", [
+        "{{",
+        printEveryNodes(node),
+        "}}"
+      ]);
     }
     case TwingNodeType.TEXT:
       return node.getAttribute("data");
