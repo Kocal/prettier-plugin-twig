@@ -14,7 +14,6 @@
     "access": "public"
   },
   "scripts": {
-    "pretest": "npm run build-standalone",
     "test": "jest",
     "prepublishOnly": "npm run build-standalone",
     "build-standalone": "rollup -c build/rollup.config.js",
@@ -48,6 +47,8 @@
     "setupFiles": [
       "<rootDir>/tests_config/run_spec.js"
     ],
+    "snapshotSerializers": ["jest-snapshot-serializer-raw"],
+    "testEnvironment": "node",
     "testRegex": "jsfmt\\.spec\\.js$"
   }
 }

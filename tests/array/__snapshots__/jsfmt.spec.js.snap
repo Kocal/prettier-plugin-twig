@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`array.twig 1`] = `
-Object {
-  Symbol(jest-snapshot-serializer-raw): "====================================options=====================================
-parsers: [\\"twig\\"]
+====================================options=====================================
+parsers: ["twig"]
 printWidth: 80
                                                                                 | printWidth
 =====================================input======================================
@@ -26,36 +25,34 @@ printWidth: 80
 
 {% set foo = ['aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue'] %}
 
-{% set foo = [1,2,3,\\"string\\",\\"bar\\",{foo:'bar'} ] %}
+{% set foo = [1,2,3,"string","bar",{foo:'bar'} ] %}
 
 =====================================output=====================================
 {% set foo = [1, 2, 3] %}
 {% set foo = [1, 2, 3] %}
-{% set foo = [\\"an\\", \\"array\\", \\"of\\", \\"string\\"] %}
+{% set foo = ["an", "array", "of", "string"] %}
 
 {% set foo = [
-    \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray\\",
-    \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray\\",
-    \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray\\",
-    \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray\\"
+    "aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray",
+    "aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray",
+    "aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray",
+    "aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray"
 ] %}
 
-{% set foo = [\\"a\\", \\"b\\", \\"c\\", \\"d\\", \\"e\\", \\"f\\", \\"g\\"] %}
+{% set foo = ["a", "b", "c", "d", "e", "f", "g"] %}
 
 {% set foo = [
-    \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue\\"
+    "aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue"
 ] %}
 
-{% set foo = [1, 2, 3, \\"string\\", \\"bar\\", { foo: \\"bar\\" }] %}
+{% set foo = [1, 2, 3, "string", "bar", { foo: "bar" }] %}
 
-================================================================================",
-}
+================================================================================
 `;
 
 exports[`array.twig 2`] = `
-Object {
-  Symbol(jest-snapshot-serializer-raw): "====================================options=====================================
-parsers: [\\"twig\\"]
+====================================options=====================================
+parsers: ["twig"]
 printWidth: 80
                                                                                 | printWidth
 =====================================input======================================
@@ -78,28 +75,27 @@ printWidth: 80
 
 {% set foo = ['aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue'] %}
 
-{% set foo = [1,2,3,\\"string\\",\\"bar\\",{foo:'bar'} ] %}
+{% set foo = [1,2,3,"string","bar",{foo:'bar'} ] %}
 
 =====================================output=====================================
 {% set foo = [1, 2, 3] %}
 {% set foo = [1, 2, 3] %}
-{% set foo = [\\"an\\", \\"array\\", \\"of\\", \\"string\\"] %}
+{% set foo = ["an", "array", "of", "string"] %}
 
 {% set foo = [
-    \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray\\",
-    \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray\\",
-    \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray\\",
-    \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray\\"
+    "aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray",
+    "aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray",
+    "aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray",
+    "aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongArray"
 ] %}
 
-{% set foo = [\\"a\\", \\"b\\", \\"c\\", \\"d\\", \\"e\\", \\"f\\", \\"g\\"] %}
+{% set foo = ["a", "b", "c", "d", "e", "f", "g"] %}
 
 {% set foo = [
-    \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue\\"
+    "aVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue"
 ] %}
 
-{% set foo = [1, 2, 3, \\"string\\", \\"bar\\", { foo: \\"bar\\" }] %}
+{% set foo = [1, 2, 3, "string", "bar", { foo: "bar" }] %}
 
-================================================================================",
-}
+================================================================================
 `;

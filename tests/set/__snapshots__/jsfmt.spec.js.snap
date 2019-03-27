@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`set.twig 1`] = `
-Object {
-  Symbol(jest-snapshot-serializer-raw): "====================================options=====================================
-parsers: [\\"twig\\"]
+====================================options=====================================
+parsers: ["twig"]
 printWidth: 80
                                                                                 | printWidth
 =====================================input======================================
@@ -12,28 +11,26 @@ printWidth: 80
 {%- set foo = 'bar' -%}
 {%-    set     foo = 'bar'-%}
 {%  set foo, bar= 'bar',  'foo'  %}
-{% set foo = 'with a \\"' %}
-{% set foo = \\"with a '\\" %}
+{% set foo = 'with a "' %}
+{% set foo = "with a '" %}
 {% set foo = [  5,   2 , 3    ]  %}
 
 =====================================output=====================================
-{% set foo = \\"bar\\" %}
-{% set foo = \\"bar\\" %}
-{% set foo = \\"bar\\" %}
-{% set foo = \\"bar\\" %}
-{% set foo, bar = \\"bar\\", \\"foo\\" %}
-{% set foo = 'with a \\"' %}
-{% set foo = \\"with a '\\" %}
+{% set foo = "bar" %}
+{% set foo = "bar" %}
+{% set foo = "bar" %}
+{% set foo = "bar" %}
+{% set foo, bar = "bar", "foo" %}
+{% set foo = 'with a "' %}
+{% set foo = "with a '" %}
 {% set foo = [5, 2, 3] %}
 
-================================================================================",
-}
+================================================================================
 `;
 
 exports[`set.twig 2`] = `
-Object {
-  Symbol(jest-snapshot-serializer-raw): "====================================options=====================================
-parsers: [\\"twig\\"]
+====================================options=====================================
+parsers: ["twig"]
 printWidth: 80
 singleQuote: true
                                                                                 | printWidth
@@ -43,8 +40,8 @@ singleQuote: true
 {%- set foo = 'bar' -%}
 {%-    set     foo = 'bar'-%}
 {%  set foo, bar= 'bar',  'foo'  %}
-{% set foo = 'with a \\"' %}
-{% set foo = \\"with a '\\" %}
+{% set foo = 'with a "' %}
+{% set foo = "with a '" %}
 {% set foo = [  5,   2 , 3    ]  %}
 
 =====================================output=====================================
@@ -53,10 +50,9 @@ singleQuote: true
 {% set foo = 'bar' %}
 {% set foo = 'bar' %}
 {% set foo, bar = 'bar', 'foo' %}
-{% set foo = 'with a \\"' %}
-{% set foo = \\"with a '\\" %}
+{% set foo = 'with a "' %}
+{% set foo = "with a '" %}
 {% set foo = [5, 2, 3] %}
 
-================================================================================",
-}
+================================================================================
 `;

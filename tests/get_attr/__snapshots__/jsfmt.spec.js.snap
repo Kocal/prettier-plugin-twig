@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`get_attr.twig 1`] = `
-Object {
-  Symbol(jest-snapshot-serializer-raw): "====================================options=====================================
-parsers: [\\"twig\\"]
+====================================options=====================================
+parsers: ["twig"]
 printWidth: 80
                                                                                 | printWidth
 =====================================input======================================
@@ -11,7 +10,7 @@ printWidth: 80
 {% set foo = foo [ bar ] %}
 {% set foo = foo.getFoo ( ) %}
 {% set foo = foo.getFoo ('foo' ) %}
-{% set foo = foo.getFoo ('foo', \\"bar\\", 1123  , [1,2,3,4]
+{% set foo = foo.getFoo ('foo', "bar", 1123  , [1,2,3,4]
     ) %}
 
 {% set foo = foo.getFoo('aLongLongLongLongLongLongLongLongLongLongLongLongValue', 'aLongLongLongLongLongLongLongLongLongLongLongLongValue', 'aLongLongLongLongLongLongLongLongLongLongLongLongValue'  )  %}
@@ -24,24 +23,24 @@ printWidth: 80
 {% set foo = foo.bar %}
 {% set foo = foo[bar] %}
 {% set foo = foo.getFoo %}
-{% set foo = foo.getFoo(\\"foo\\") %}
-{% set foo = foo.getFoo(\\"foo\\", \\"bar\\", 1123, [1, 2, 3, 4]) %}
+{% set foo = foo.getFoo("foo") %}
+{% set foo = foo.getFoo("foo", "bar", 1123, [1, 2, 3, 4]) %}
 
 {% set foo = foo.getFoo(
-    \\"aLongLongLongLongLongLongLongLongLongLongLongLongValue\\",
-    \\"aLongLongLongLongLongLongLongLongLongLongLongLongValue\\",
-    \\"aLongLongLongLongLongLongLongLongLongLongLongLongValue\\"
+    "aLongLongLongLongLongLongLongLongLongLongLongLongValue",
+    "aLongLongLongLongLongLongLongLongLongLongLongLongValue",
+    "aLongLongLongLongLongLongLongLongLongLongLongLongValue"
 ) %}
 
 {% set foo = foo.getFoo(
-    \\"aLongLongLongLongLongLongLongLongLongLongLongLongValue\\",
+    "aLongLongLongLongLongLongLongLongLongLongLongLongValue",
     [
-        \\"aLongLongLongLongLongLongLongLongLongLongLongLongValue\\",
-        \\"aLongLongLongLongLongLongLongLongLongLongLongLongValue\\",
+        "aLongLongLongLongLongLongLongLongLongLongLongLongValue",
+        "aLongLongLongLongLongLongLongLongLongLongLongLongValue",
         [
-            \\"aLongLongLongLongLongLongLongLongLongLongLongLongValue\\",
+            "aLongLongLongLongLongLongLongLongLongLongLongLongValue",
             {
-                aLongLongLongLongLongLongLongLongLongLongLongLongKey: \\"aLongLongLongLongLongLongLongLongLongLongLongLongValue\\"
+                aLongLongLongLongLongLongLongLongLongLongLongLongKey: "aLongLongLongLongLongLongLongLongLongLongLongLongValue"
             }
         ]
     ]
@@ -89,6 +88,5 @@ printWidth: 80
     )
 ) %}
 
-================================================================================",
-}
+================================================================================
 `;

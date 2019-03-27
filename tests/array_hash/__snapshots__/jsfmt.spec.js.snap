@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`array_hash.twig 1`] = `
-Object {
-  Symbol(jest-snapshot-serializer-raw): "====================================options=====================================
-parsers: [\\"twig\\"]
+====================================options=====================================
+parsers: ["twig"]
 printWidth: 80
                                                                                 | printWidth
 =====================================input======================================
@@ -11,7 +10,7 @@ printWidth: 80
 {% set foo = {foo:bar}   -%}
 {% set foo = {(foo): 'bar'} %}
 {% set foo = {foo:'bar', (foo): 'bar', items: {a: 'a'  , b:'b'} } %}
-{% set foo = {'a': 'a', \\"b\\":\\"b\\" } %}
+{% set foo = {'a': 'a', "b":"b" } %}
 {% set foo = {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: 'aVeryVeryVeryVeryVeryVeryVeryLongValue', aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: 'aVeryVeryVeryVeryVeryVeryVeryLongValue2', } %}
 
 {% set foo = {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: 'aVeryVeryVeryVeryVeryVeryVeryLongValue', aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: {
@@ -29,44 +28,42 @@ printWidth: 80
 %}
 
 =====================================output=====================================
-{% set foo = { foo: \\"bar\\" } %}
+{% set foo = { foo: "bar" } %}
 {% set foo = { foo: bar } %}
-{% set foo = { (foo): \\"bar\\" } %}
-{% set foo = { foo: \\"bar\\", (foo): \\"bar\\", items: { a: \\"a\\", b: \\"b\\" } } %}
-{% set foo = { a: \\"a\\", b: \\"b\\" } %}
+{% set foo = { (foo): "bar" } %}
+{% set foo = { foo: "bar", (foo): "bar", items: { a: "a", b: "b" } } %}
+{% set foo = { a: "a", b: "b" } %}
 {% set foo = {
-    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue\\",
-    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue2\\"
+    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: "aVeryVeryVeryVeryVeryVeryVeryLongValue",
+    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: "aVeryVeryVeryVeryVeryVeryVeryLongValue2"
 } %}
 
 {% set foo = {
-    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue\\",
+    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: "aVeryVeryVeryVeryVeryVeryVeryLongValue",
     aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: {
-        aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey3: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue3\\",
+        aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey3: "aVeryVeryVeryVeryVeryVeryVeryLongValue3",
         aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey4: {
-            aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey5: \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue5\\"
+            aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey5: "aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue5"
         }
     }
 } %}
 
 {% set page = {
-    foo: \\"Foo\\",
-    bar: \\"Bar\\",
-    foobar: \\"foobar\\",
+    foo: "Foo",
+    bar: "Bar",
+    foobar: "foobar",
     foo: foo.foo,
     bar: foo.foo.bar,
     bar: foo[foo].bar,
     bar: foo[foo][foo].bar.bar
 } %}
 
-================================================================================",
-}
+================================================================================
 `;
 
 exports[`array_hash.twig 2`] = `
-Object {
-  Symbol(jest-snapshot-serializer-raw): "====================================options=====================================
-parsers: [\\"twig\\"]
+====================================options=====================================
+parsers: ["twig"]
 printWidth: 80
                                                                                 | printWidth
 =====================================input======================================
@@ -74,7 +71,7 @@ printWidth: 80
 {% set foo = {foo:bar}   -%}
 {% set foo = {(foo): 'bar'} %}
 {% set foo = {foo:'bar', (foo): 'bar', items: {a: 'a'  , b:'b'} } %}
-{% set foo = {'a': 'a', \\"b\\":\\"b\\" } %}
+{% set foo = {'a': 'a', "b":"b" } %}
 {% set foo = {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: 'aVeryVeryVeryVeryVeryVeryVeryLongValue', aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: 'aVeryVeryVeryVeryVeryVeryVeryLongValue2', } %}
 
 {% set foo = {aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: 'aVeryVeryVeryVeryVeryVeryVeryLongValue', aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: {
@@ -92,36 +89,35 @@ printWidth: 80
 %}
 
 =====================================output=====================================
-{% set foo = { foo: \\"bar\\" } %}
+{% set foo = { foo: "bar" } %}
 {% set foo = { foo: bar } %}
-{% set foo = { (foo): \\"bar\\" } %}
-{% set foo = { foo: \\"bar\\", (foo): \\"bar\\", items: { a: \\"a\\", b: \\"b\\" } } %}
-{% set foo = { a: \\"a\\", b: \\"b\\" } %}
+{% set foo = { (foo): "bar" } %}
+{% set foo = { foo: "bar", (foo): "bar", items: { a: "a", b: "b" } } %}
+{% set foo = { a: "a", b: "b" } %}
 {% set foo = {
-    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue\\",
-    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue2\\"
+    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: "aVeryVeryVeryVeryVeryVeryVeryLongValue",
+    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: "aVeryVeryVeryVeryVeryVeryVeryLongValue2"
 } %}
 
 {% set foo = {
-    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue\\",
+    aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey: "aVeryVeryVeryVeryVeryVeryVeryLongValue",
     aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey2: {
-        aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey3: \\"aVeryVeryVeryVeryVeryVeryVeryLongValue3\\",
+        aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey3: "aVeryVeryVeryVeryVeryVeryVeryLongValue3",
         aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey4: {
-            aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey5: \\"aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue5\\"
+            aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongKey5: "aVeryVeryVeryVeryVeryVeryVeryVeryVeryLongValue5"
         }
     }
 } %}
 
 {% set page = {
-    foo: \\"Foo\\",
-    bar: \\"Bar\\",
-    foobar: \\"foobar\\",
+    foo: "Foo",
+    bar: "Bar",
+    foobar: "foobar",
     foo: foo.foo,
     bar: foo.foo.bar,
     bar: foo[foo].bar,
     bar: foo[foo][foo].bar.bar
 } %}
 
-================================================================================",
-}
+================================================================================
 `;
