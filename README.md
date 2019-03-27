@@ -41,7 +41,7 @@ The plugin is still under development, nothing will work if you try to install i
 | `INCLUDE`                    | `{% include 'user.html' %}`                                                   | :x: |
 | `MACRO`                      | `{% macro input(name, value, type = "text", size = 20) %} ... {% endmacro %}` | :x: |
 | `SANDBOX`                    | `{% sandbox %} {% include 'user.html' %} {% endsandbox %}`                    | :x: |
-| `PRINT`                      | `{{ 'foo }} `                                                                 | :heavy_check_mark: |
+| `PRINT`                      | `{{ 'foo }} `                                                                 | :heavy_check_mark: (waiting for `{{-` and `-}}`) |
 | `SET`                        | `{% set a = 'a' %} {% set a, b, = 'a', 'b' %}`                                | :heavy_check_mark: |
 | `SPACELESS`                  | `{% spaceless %}<div>  <span>Hello</span>  </div>{% endspaceless %}`          | :x: |
 | `TEXT`                       | `"some text"`                                                                 | :x: |
