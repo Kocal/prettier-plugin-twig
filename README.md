@@ -47,6 +47,10 @@ The plugin is still under development, nothing will work if you try to install i
 | `TEXT`                       | `"some text"`                                                                 | :x: |
 | `WITH`                       | `{% with { foo: 42 } %} foo: {{ foo }} {% endwith %}`                         | :x: |
 
+## Playground
+
+You can try the plugin directly in your browser on [https://prettier-plugin-twig.netlify.com](https://prettier-plugin-twig.netlify.com).
+
 ## Install
 
 yarn:
