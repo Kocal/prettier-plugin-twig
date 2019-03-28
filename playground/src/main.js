@@ -7,6 +7,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import VueCodemirror from "vue-codemirror";
 import "codemirror/lib/codemirror.css";
 import "codemirror/mode/twig/twig.js";
+import "codemirror/addon/display/rulers.js";
 
 import App from "./App.vue";
 

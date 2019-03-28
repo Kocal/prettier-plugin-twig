@@ -4,10 +4,10 @@
     <b-container fluid>
       <b-row>
         <b-col sm="6">
-          <codemirror v-model="inputCode" :options="{lineNumbers:true, mode: 'twig' }"/>
+          <codemirror v-model="inputCode" :options="cmInputOptions"/>
         </b-col>
         <b-col sm="6">
-          <codemirror v-model="outputCode" :options="{ lineNumbers: true, mode: 'twig',readOnly: true }"/>
+          <codemirror v-model="outputCode" :options="cmOutputOptions"/>
         </b-col>
       </b-row>
     </b-container>
@@ -25,8 +25,28 @@ export default {
     return {
       inputCode: `{%set world = 'world'%}
 Hello {{world}}!`,
-      outputCode: null
+      outputCode: null,
+      prettierOptions: {
+        printWidth: 80
+      }
     };
+  },
+  computed: {
+    cmInputOptions() {
+      return {
+        lineNumbers: true,
+        mode: "twig",
+        rulers: [{ color: "lightgrey", column: this.prettierOptions.printWidth }]
+      };
+    },
+    cmOutputOptions() {
+      return {
+        lineNumbers: true,
+        mode: "twig",
+        readOnly: true,
+        rulers: [{ color: "black", column: this.prettierOptions.printWidth }]
+      };
+    }
   },
   watch: {
     inputCode: {
