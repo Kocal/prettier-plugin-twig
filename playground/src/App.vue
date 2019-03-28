@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { debounce } from "lodash-es";
 import TheHeader from "./components/TheHeader";
 
 export default {
@@ -30,16 +31,16 @@ Hello {{world}}!`,
   watch: {
     inputCode: {
       immediate: true,
-      handler(inputCode) {
+      handler: debounce(function(inputCode) {
         try {
           this.outputCode = global.prettier.format(inputCode, {
             plugins: global.prettierPlugins,
             parser: "twig"
           });
         } catch (e) {
-          this.outputCode = e;
+          this.outputCode = typeof e === "string" ? e : e.message;
         }
-      }
+      }, 100)
     }
   }
 };
