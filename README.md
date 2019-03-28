@@ -97,6 +97,7 @@ First, grab both standalone scripts from an npm CDN like [unpkg](https://unpkg.c
 
 ```html
 <script src="https://unpkg.com/prettier/standalone.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/twing/dist/lib.min.js"></script>
 <script src="https://unpkg.com/@kocal/prettier-plugin-twig/standalone.js"></script>
 ```
 

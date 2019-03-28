@@ -1,10 +1,7 @@
 import { resolve } from "path";
-
-import builtins from 'rollup-plugin-node-builtins';
-import globals from 'rollup-plugin-node-globals';
 import nodeResolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
-import json from 'rollup-plugin-json';
+import json from "rollup-plugin-json";
 import replace from "rollup-plugin-replace";
 import babel from "rollup-plugin-babel";
 import { terser } from "rollup-plugin-terser";
@@ -20,16 +17,15 @@ export default {
     name: "prettierPlugins.twig",
     exports: "named",
     globals: {
-      prettier: "prettier"
+      prettier: "prettier",
+      twing: "Twing"
     },
     paths: {
       prettier: "prettier/standalone"
     }
   },
-  external: ["prettier"],
+  external: ["prettier", "twing"],
   plugins: [
-    builtins(),
-    globals(),
     nodeResolve(),
     commonjs(),
     json(),
