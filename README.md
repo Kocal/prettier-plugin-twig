@@ -61,6 +61,8 @@ npm install --save-dev prettier @kocal/prettier-plugin-twig
 
 ## Use
 
+### With Node.js
+
 You can add prettier as a script in your `package.json`,
 
 ```json
@@ -86,4 +88,24 @@ and then run it via
 yarn run prettier path/to/file.twig --write
 # or
 npm run prettier -- path/to/file.twig --write
+```
+
+### In the Browser
+This package exposes a `standalone.js` that can be used alongside Prettier's own `standalone.js` to make the Twig plugin work in browsers without a compile step.
+
+First, grab both standalone scripts from an npm CDN like [unpkg](https://unpkg.com/):
+
+```html
+<script src="https://unpkg.com/prettier/standalone.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/twing/dist/lib.min.js"></script>
+<script src="https://unpkg.com/@kocal/prettier-plugin-twig/standalone.js"></script>
+```
+
+Then use Prettier with Twig, just like this:
+
+```js
+prettier.format(YOUR_CODE, {
+  plugins: prettierPlugins,
+  parser: "twig"
+});
 ```
