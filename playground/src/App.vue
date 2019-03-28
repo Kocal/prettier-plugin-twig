@@ -1,28 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <TheHeader/>
+    <b-container fluid>
+      <b-row>
+        <b-col sm="6">
+          <codemirror v-model="inputCode" :options="{lineNumbers:true, mode: 'twig' }"/>
+        </b-col>
+        <b-col sm="6">
+          <codemirror v-model="outputCode" :options="{ lineNumbers: true, mode: 'twig',readOnly: true }"/>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TheHeader from "./components/TheHeader";
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  name: "App",
+  components: { TheHeader },
+  data() {
+    return {
+      inputCode: `{%set world = 'world'%}
+Hello {{world}}!`,
+      outputCode: null
+    };
+  },
+  watch: {
+    inputCode: {
+      immediate: true,
+      handler(inputCode) {
+        try {
+          this.outputCode = global.prettier.format(inputCode, {
+            plugins: global.prettierPlugins,
+            parser: "twig"
+          });
+        } catch (e) {
+          this.outputCode = e;
+        }
+      }
+    }
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
