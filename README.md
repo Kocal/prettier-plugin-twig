@@ -10,7 +10,16 @@ The plugin is still under development, nothing will work if you try to install i
 
 ### Roadmap
 
-| Type                         | Example                                                                       | Implemented |
+#### Options support
+
+| Option                 | Example                                                                               | Supported |
+| ---------------------- | ------------------------------------------------------------------------------------- | --------- |
+| `--single-quote`       | `{{ "foo" }}` if `false`, `{{ 'foo' }}` if `true`                                     | :heavy_check_mark: |
+| `--no-bracket-spacing` | `{% set foo = { foo: 'bar' } %}` if `false`, `{% set foo = {foo: 'bar'} %}` if `true` | :x: |
+
+#### Nodes
+
+| Node Type                    | Example                                                                       | Implemented |
 | ---------------------------- | ----------------------------------------------------------------------------- | ----------- |
 | `AUTO_ESCAPE`                | `{% autoescape 'html' %}Foo{% endautoescape %}`                               | :x: |
 | `BLOCK`                      | `{% block title%}The title{% endblock %}`                                     | :x: |
