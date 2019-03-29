@@ -1,5 +1,5 @@
 <template>
-  <b-navbar variant="dark" type="dark">
+  <b-navbar variant="dark" type="dark" class="header">
     <b-navbar-brand>
       <span>Prettier + Twig</span>
     </b-navbar-brand>

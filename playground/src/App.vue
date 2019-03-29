@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <TheHeader class="header"/>
+    <TheHeader/>
     <div class="editors-container">
-      <TheOptionsContainer class="options-container"/>
+      <TheOptionsContainer/>
       <div class="editors">
-        <codemirror v-model="inputCode" :options="cmInputOptions" class="editor"/>
-        <codemirror v-model="outputCode" :options="cmOutputOptions" class="editor"/>
+        <codemirror :value="$store.state.inputCode" :options="cmInputOptions" @input="onInputCodeChange" class="editor"/>
+        <codemirror :value="$store.state.outputCode" :options="cmOutputOptions" class="editor"/>
       </div>
     </div>
-    <TheBottomBar class="bottom-bar"/>
+    <TheBottomBar/>
   </div>
 </template>
 
@@ -21,22 +21,12 @@ import TheBottomBar from "./components/TheBottomBar";
 export default {
   name: "App",
   components: { TheBottomBar, TheOptionsContainer, TheHeader },
-  data() {
-    return {
-      inputCode: `{%set world = 'world'%}
-Hello {{world}}!`,
-      outputCode: null,
-      prettierOptions: {
-        printWidth: 80
-      }
-    };
-  },
   computed: {
     cmInputOptions() {
       return {
         lineNumbers: true,
         mode: "twig",
-        rulers: [{ color: "lightgrey", column: this.prettierOptions.printWidth }]
+        rulers: [{ color: "lightgrey", column: this.$store.state.prettierOptions.printWidth }]
       };
     },
     cmOutputOptions() {
@@ -44,29 +34,18 @@ Hello {{world}}!`,
         lineNumbers: true,
         mode: "twig",
         readOnly: true,
-        rulers: [{ color: "black", column: this.prettierOptions.printWidth }]
+        rulers: [{ color: "black", column: this.$store.state.prettierOptions.printWidth }]
       };
     }
   },
-  watch: {
-    inputCode: {
-      immediate: true,
-      handler: debounce(function(inputCode) {
-        if (!inputCode) {
-          this.outputCode = "";
-          return;
-        }
-
-        try {
-          this.outputCode = global.prettier.format(inputCode, {
-            plugins: global.prettierPlugins,
-            parser: "twig"
-          });
-        } catch (e) {
-          this.outputCode = typeof e === "string" ? e : e.message;
-        }
-      }, 100)
-    }
+  beforeMount() {
+    this.onInputCodeChange(`{%set world = 'world'%}
+Hello {{world}}!`);
+  },
+  methods: {
+    onInputCodeChange: debounce(function(inputCode) {
+      this.$store.dispatch("updateCode", inputCode);
+    }, 100)
   }
 };
 </script>
@@ -76,6 +55,7 @@ Hello {{world}}!`,
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #fafafa;
 }
 
 .editors-container {
