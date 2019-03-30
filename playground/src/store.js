@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { prettify } from "./prettier";
+import { prettify } from "./worker";
 
 Vue.use(Vuex);
 
@@ -28,8 +28,8 @@ export default new Vuex.Store({
     updateInputCode(state, inputCode) {
       state.inputCode = inputCode;
     },
-    prettify(state) {
-      state.outputCode = prettify(state.inputCode, state.prettierOptions);
+    updateOutputCode(state, outputCode) {
+      state.outputCode = outputCode;
     },
     updatePrettierOption(state, { name, value }) {
       state.prettierOptions[name] = value;
@@ -42,17 +42,22 @@ export default new Vuex.Store({
     toggleOptionsVisibility({ commit }) {
       commit("toggleOptionsVisibility");
     },
-    updateCode({ commit }, inputCode) {
+    updateCode({ commit, dispatch }, inputCode) {
       commit("updateInputCode", inputCode);
-      commit("prettify");
+      dispatch("prettify");
     },
-    updatePrettierOption({ commit }, { name, value }) {
+    updatePrettierOption({ commit, dispatch }, { name, value }) {
       commit("updatePrettierOption", { name, value });
-      commit("prettify");
+      dispatch("prettify");
     },
-    resetPrettierOptions({ commit }) {
+    resetPrettierOptions({ commit, dispatch }) {
       commit("resetPrettierOptions");
-      commit("prettify");
+      dispatch("prettify");
+    },
+    prettify({ state, commit }) {
+      prettify(state.inputCode, state.prettierOptions)
+        .then(result => commit("updateOutputCode", result.formatted))
+        .catch(e => commit("updateOutputCode", e));
     }
   }
 });

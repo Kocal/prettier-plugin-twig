@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { debounce } from "lodash-es";
 import TheHeader from "./components/TheHeader";
 import TheOptionsContainer from "./components/TheOptionsContainer";
 import TheBottomBar from "./components/TheBottomBar";
@@ -43,9 +42,9 @@ export default {
 Hello {{world}}!`);
   },
   methods: {
-    onInputCodeChange: debounce(function(inputCode) {
+    onInputCodeChange(inputCode) {
       this.$store.dispatch("updateCode", inputCode);
-    }, 100)
+    }
   }
 };
 </script>
