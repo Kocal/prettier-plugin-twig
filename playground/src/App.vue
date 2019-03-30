@@ -25,14 +25,14 @@ export default {
     cmInputOptions() {
       return {
         lineNumbers: true,
-        mode: "twig",
+        mode: "htmltwig",
         rulers: [{ color: "lightgrey", column: this.$store.state.prettierOptions.printWidth }]
       };
     },
     cmOutputOptions() {
       return {
         lineNumbers: true,
-        mode: "twig",
+        mode: "htmltwig",
         readOnly: true,
         rulers: [{ color: "black", column: this.$store.state.prettierOptions.printWidth }]
       };
