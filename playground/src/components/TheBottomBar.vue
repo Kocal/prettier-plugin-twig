@@ -7,17 +7,22 @@
     <b-btn variant="outline-secondary" size="sm" @click="$store.dispatch('updateCode', '')">
       Clear
     </b-btn>
+
+    <Spacer/>
   </footer>
 </template>
 
 <script>
+import Spacer from "./Spacer";
 export default {
-  name: "TheBottomBar"
+  name: "TheBottomBar",
+  components: { Spacer }
 };
 </script>
 
 <style scoped>
 .bottom-bar {
+  display: flex;
   border-top: 1px solid #ddd;
   padding: 5px;
 }

@@ -29,6 +29,10 @@ export const postMessage = (message) => {
   });
 };
 
+export const getMetadata = () => {
+  return postMessage({ type: "meta" });
+};
+
 export const prettify = (code, options) => {
   return postMessage({ type: "format", code, options });
 };

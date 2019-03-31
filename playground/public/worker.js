@@ -12,6 +12,14 @@ self.onmessage = function(event) {
 };
 
 function handleMessage(message) {
+  if (message.type === "meta") {
+    return {
+      type: "meta",
+      supportInfo: JSON.parse(JSON.stringify(prettier.getSupportInfo(null))),
+      version: prettier.version
+    };
+  }
+
   if (message.type === "format") {
     var options = message.options || {};
 

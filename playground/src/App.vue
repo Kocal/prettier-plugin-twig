@@ -25,7 +25,7 @@ export default {
       return {
         lineNumbers: true,
         mode: "htmltwig",
-        rulers: [{ color: "lightgrey", column: this.$store.state.prettierOptions.printWidth }]
+        rulers: [{ color: "lightgrey", column: this.$store.state.optionsValues.printWidth }]
       };
     },
     cmOutputOptions() {
@@ -33,11 +33,12 @@ export default {
         lineNumbers: true,
         mode: "htmltwig",
         readOnly: true,
-        rulers: [{ color: "black", column: this.$store.state.prettierOptions.printWidth }]
+        rulers: [{ color: "black", column: this.$store.state.optionsValues.printWidth }]
       };
     }
   },
-  beforeMount() {
+  created() {
+    this.$store.dispatch("loadPrettierMeta");
     this.onInputCodeChange(`{%set world = 'world'%}
 Hello {{world}}!`);
   },

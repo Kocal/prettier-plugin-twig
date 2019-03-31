@@ -1,21 +1,31 @@
 <template>
   <aside v-show="$store.state.showOptions" class="options-container">
-    <Options label="Global">
-      <OptionItem name="printWidth" label="--print-width" type="number"/>
-      <OptionItem name="tabWidth" label="--tab-width" type="number"/>
-      <OptionItem name="useTabs" label="--use-tabs" type="checkbox"/>
-    </Options>
+    <template v-if="$store.state.metaLoading">
+      Loading...
+    </template>
+    <template v-else-if="$store.state.metaError">
+      {{ $store.state.metaError }}
+    </template>
+    <template v-else>
+      <Options
+        v-for="category in categoriesToDisplay"
+        :key="category"
+        :label="category"
+      >
+        <OptionItem
+          v-for="option in $store.getters.optionsByCategory(category)"
+          v-if="optionsToDisplay.includes(option.name)"
+          v-bind="option"
+          :key="option.name"
+        />
+      </Options>
 
-    <Options label="Common">
-      <OptionItem name="singleQuote" label="--single-quote" type="checkbox"/>
-      <OptionItem name="noBracketSpacing" label="--no-bracket-spacing" type="checkbox"/>
-    </Options>
-
-    <div class="p-2">
-      <b-btn variant="outline-secondary" size="sm" @click="$store.dispatch('resetPrettierOptions')">
-        Reset options
-      </b-btn>
-    </div>
+      <div class="p-2">
+        <b-btn variant="outline-secondary" size="sm" @click="$store.dispatch('resetPrettierOptions')">
+          Reset options
+        </b-btn>
+      </div>
+    </template>
   </aside>
 </template>
 
@@ -25,7 +35,18 @@ import Options from "./Options";
 
 export default {
   name: "TheOptionsContainer",
-  components: { Options, OptionItem }
+  components: { Options, OptionItem },
+  data() {
+    return {
+      categoriesToDisplay: ["Global", "Common"],
+      optionsToDisplay: [
+        // Global
+        "printWidth", "tabWidth", "useTabs",
+        // Common
+        "bracketSpacing", "singleQuote"
+      ]
+    };
+  }
 };
 </script>
 
