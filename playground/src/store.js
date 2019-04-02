@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import paramCase from "param-case";
 import { getMetadata, prettify } from "./worker";
+import { toCliArg } from "./cli";
 
 Vue.use(Vuex);
 
@@ -18,6 +18,7 @@ export default new Vuex.Store({
     outputCode: ""
   },
   getters: {
+    version: (state) => state.meta && state.meta.version,
     options: (state) => getOptions(state),
     optionsByCategory: (state) => (category) => getOptions(state).filter(option => option.category === category)
   },
@@ -44,7 +45,7 @@ export default new Vuex.Store({
           option.inverted = true;
         }
 
-        option.cliName = `--${(option.inverted ? "no-" : "")}${paramCase(option.name)}`;
+        option.cliName = toCliArg(option.name, option.inverted);
 
         return option;
       });
