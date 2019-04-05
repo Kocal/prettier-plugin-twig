@@ -157,7 +157,6 @@ function genericPrint(path, opts) {
           .getNodes()
           .values()
       ).map(n => genericPrint(n));
-      // const values = printEveryNodes(node.getNode("values"));
 
       return join(" ", [
         "{%",
@@ -185,6 +184,17 @@ function genericPrint(path, opts) {
       }
 
       return String(value);
+    }
+    case TwingNodeType.EXPRESSION_FILTER: {
+      const nodeNode = node.getNode("node");
+      const nodeFilter = node.getNode("filter");
+      const nodeArguments = node.getNode("arguments");
+
+      const keyValue = genericPrint(nodeNode);
+
+      // TODO: handle filter and arguments
+
+      return keyValue;
     }
     case TwingNodeType.EXPRESSION_GET_ATTR: {
       const nodeNode = node.getNode("node");

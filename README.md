@@ -23,7 +23,7 @@ The plugin is still under development, nothing will work if you try to install i
 | `EXPRESSION_BLOCK_REFERENCE` | ...                                                                           | :x: |
 | `EXPRESSION_CONDITIONAL`     | ...                                                                           | :x: |
 | `EXPRESSION_CONSTANT`        | `"foo"`, `123`                                                                | :heavy_check_mark: |
-| `EXPRESSION_FILTER`          | ...                                                                           | :x: |
+| `EXPRESSION_FILTER`          | `{{ foo }}` or `{{ 1 + 2 }}`                                                  | :x: |
 | `EXPRESSION_FUNCTION`        | ...                                                                           | :x: |
 | `EXPRESSION_GET_ATTR`        | Accessing an attribute, e.g.: `foo.bar`, `foo[bar]`, `foo.getBar()`           | :heavy_check_mark: |
 | `EXPRESSION_METHOD_CALL`     | ...                                                                           | :x: |
