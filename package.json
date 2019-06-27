@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "linguist-languages": "^6.3.0",
-    "twing": "^2.2.2"
+    "twig-lexer": "^0.3.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.2",
