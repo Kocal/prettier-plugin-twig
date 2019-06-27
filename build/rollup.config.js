@@ -18,13 +18,12 @@ export default {
     exports: "named",
     globals: {
       prettier: "prettier",
-      twing: "Twing"
     },
     paths: {
       prettier: "prettier/standalone"
     }
   },
-  external: ["prettier", "twing"],
+  external: ["prettier"],
   plugins: [
     nodeResolve(),
     commonjs(),
