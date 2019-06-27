@@ -40,15 +40,5 @@
   },
   "peerDependencies": {
     "prettier": "^1.16.0"
-  },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/tests_config/run_spec.js"
-    ],
-    "snapshotSerializers": [
-      "jest-snapshot-serializer-raw"
-    ],
-    "testEnvironment": "node",
-    "testRegex": "jsfmt\\.spec\\.js$"
   }
 }
