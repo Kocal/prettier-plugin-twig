@@ -2,8 +2,11 @@ const ENABLE_COVERAGE = !!process.env.CI;
 
 const makeBaseProject = () => ({
   setupFiles: ["<rootDir>/tests_config/run_spec.js"],
-  testRegex: "jsfmt\\.spec\\.js$|__tests__/.*\\.js$",
-  snapshotSerializers: ["jest-snapshot-serializer-raw"]
+  testRegex: "jsfmt\.spec\.js$|unit/(.+)\.js$",
+  snapshotSerializers: ["jest-snapshot-serializer-raw"],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
 });
 
 module.exports = {
